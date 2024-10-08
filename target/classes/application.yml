@@ -5,9 +5,10 @@ spring:
     username: postgres
     password: postgres
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: create  # or create-drop for testing, but be cautious in production
-        show_sql: true
-        format_sql: true
+      database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          ddl-auto: create  # or create-drop for testing, but be cautious in production
+          show_sql: true
+          format_sql: true
