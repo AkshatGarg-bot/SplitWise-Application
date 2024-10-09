@@ -35,9 +35,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(User user) {
-        userRepository.delete(user);  //make sure to delete the user from the groups he is a part of
-        return user;
+    public User deleteUser(long id) {
+        Optional<User> u = getUser(id);
+        if(u.isEmpty()==false){
+            userRepository.delete(u.get());
+            return u.get();
+        }
+        //make sure to delete the user from the groups he is a part of
+        return null;
     }
 
     @Override

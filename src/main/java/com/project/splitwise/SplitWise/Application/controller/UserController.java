@@ -4,10 +4,9 @@ import com.project.splitwise.SplitWise.Application.dao.entity.User;
 import com.project.splitwise.SplitWise.Application.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -21,6 +20,21 @@ public class UserController {
     @PostMapping
     public User saveUser(@RequestBody  User user){
         return userService.saveUser(user);
+    }
+
+    @DeleteMapping("/{userID}")
+    public User deleteUser(@PathVariable long userID){
+        return userService.deleteUser(userID);
+    }
+
+    @GetMapping("/{userID}")
+    public Optional<User> getUser(@PathVariable long userID){
+        return userService.getUser(userID);
+    }
+
+    @PutMapping()
+    public User updateUser(@RequestBody User user){
+        return userService.updateUser(user);
     }
 
 
