@@ -19,6 +19,7 @@ public class GroupResponse {
     @OneToOne
     private Group group;
 
-    @ManyToOne
+    @OneToMany
+    @JoinColumn(name = "simple")
     List<SimplifiedTransaction> simplifiedTransactionList;
 }
