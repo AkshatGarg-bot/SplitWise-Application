@@ -36,18 +36,18 @@ public class UserController {
             }
             else
             {
-                List<Long> users= grp.get().getUsers();
+                List<Long> users= grp.get().getUsersIds();
                 if(users == null)
                 {
                     List<Long> usrs = new ArrayList<>();
                     usrs.add(id);
-                    grp.get().setUsers(usrs);
+                    grp.get().setUsersIds(usrs);
                     groupService.saveGroup(grp.get());
                 }
                 else if(!users.contains(id))
                 {
                     users.add(id);
-                    grp.get().setUsers(users);
+                    grp.get().setUsersIds(users);
                     groupService.saveGroup(grp.get());
                 }
             }
