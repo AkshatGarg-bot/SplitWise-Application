@@ -13,9 +13,9 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long fromUser;
+    private Long fromUserId;
 
-    private Long toUser;
+    private Long toUserId;
 
     private Double amount;
 

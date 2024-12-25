@@ -27,8 +27,8 @@ public class GroupServiceImpl implements GroupService {
         Optional<Group> g = groupRepository.findById(id);
         if(g.isEmpty()==false){
             g.get().setName(group.getName());
-            g.get().setTransactions(group.getTransactions());
-            g.get().setUsers(group.getUsers());
+            g.get().setTransactionsIds(group.getTransactionsIds());
+            g.get().setUsersIds(group.getUsersIds());
             return saveGroup(g.get());
         }
         return null;

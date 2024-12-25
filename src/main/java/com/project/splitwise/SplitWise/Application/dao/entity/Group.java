@@ -17,8 +17,8 @@ public class Group {
 
     private String name;
 
-    private List<Long> users;
+    private List<Long> usersIds;
 
-    private List<Long> transactions;
+    private List<Long> transactionsIds;
 
 }

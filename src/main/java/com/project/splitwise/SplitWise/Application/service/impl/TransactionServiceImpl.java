@@ -1,5 +1,6 @@
 package com.project.splitwise.SplitWise.Application.service.impl;
 
+import com.project.splitwise.SplitWise.Application.dao.entity.Group;
 import com.project.splitwise.SplitWise.Application.dao.entity.Transaction;
 import com.project.splitwise.SplitWise.Application.dao.repository.TransactionRepository;
 import com.project.splitwise.SplitWise.Application.service.TransactionService;
@@ -7,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,10 +19,29 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private final TransactionRepository transactionRepository;
 
+    @Autowired
+    private final GroupServiceImpl groupService;
+
     @Override
     public Transaction saveTransaction(Transaction transaction) {
-        return transactionRepository.save(transaction);
-        //add into group as well
+        //update transaction in group
+        Transaction savedtransaction = transactionRepository.save(transaction);
+        Group group = groupService.getGroup(transaction.getGroupId()).orElse(null);
+        if(group!=null){
+            //add transaction in group transactionIds list and save transaction in db
+            List<Long> transactionList = new ArrayList<>();
+            if(group.getTransactionsIds()!=null){
+                transactionList = group.getTransactionsIds();
+            }
+            transactionList.add(savedtransaction.getId());
+            group.setTransactionsIds(transactionList);
+            groupService.updateGroup(group);
+            return savedtransaction;
+        }
+        else{
+            System.out.println("Group id don't exist");
+        }
+        return null;
     }
 
     @Override
@@ -28,8 +50,8 @@ public class TransactionServiceImpl implements TransactionService {
         Optional<Transaction> t = transactionRepository.findById(id);
         if(t.isEmpty()==false){
             t.get().setAmount(t.get().getAmount());
-            t.get().setFromUser(t.get().getFromUser());
-            t.get().setToUser(t.get().getToUser());
+            t.get().setFromUserId(t.get().getFromUserId());
+            t.get().setToUserId(t.get().getToUserId());
             return saveTransaction(t.get());
         }
         return null;
