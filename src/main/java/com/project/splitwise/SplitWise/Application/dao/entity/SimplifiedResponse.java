@@ -18,5 +18,5 @@ public class SimplifiedResponse {
     @OneToOne
     private Group group;
 
-    Map<User , Map<User , Double>> map;
+//    Map<User , Map<User , Double>> map;
 }

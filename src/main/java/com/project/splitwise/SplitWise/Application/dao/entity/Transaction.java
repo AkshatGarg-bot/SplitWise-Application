@@ -12,18 +12,14 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "from_user_id")
-    private User fromUser;
 
-    @ManyToOne
-    @JoinColumn(name = "to_user_id")
-    private User toUser;
+    private Long fromUser;
+
+    private Long toUser;
 
     private Double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
+
+    private Long groupId;
 
 }

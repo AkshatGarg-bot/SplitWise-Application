@@ -14,16 +14,11 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @ManyToMany
-    @JoinTable(
-            name = "groups_users",
-            joinColumns = @JoinColumn(name = "group_id"),  // Foreign key in the join table referencing Group
-            inverseJoinColumns = @JoinColumn(name = "user_id")  // Foreign key in the join table referencing User
-    )
-    List<User> users;
 
-    @OneToMany(mappedBy = "group")
-    private List<Transaction> transactions;
+    private String name;
+
+    private List<Long> users;
+
+    private List<Long> transactions;
 
 }

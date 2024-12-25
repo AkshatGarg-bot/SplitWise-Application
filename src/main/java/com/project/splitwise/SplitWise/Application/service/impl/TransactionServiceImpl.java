@@ -19,6 +19,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction saveTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
+        //add into group as well
     }
 
     @Override

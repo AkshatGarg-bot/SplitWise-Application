@@ -22,7 +22,6 @@ public class User {
 
     private  String phn;
 
-    @ManyToMany(mappedBy = "users")
-    List<Group> groups;
+    List<Long> groupsIds;
 
 }
