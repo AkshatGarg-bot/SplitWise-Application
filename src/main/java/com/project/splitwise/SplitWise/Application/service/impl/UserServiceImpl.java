@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        User usr = userRepository.save(user);
-        List<Long> ids= usr.getGroupsIds();
+        User usr = null;
+        List<Long> ids= user.getGroupsIds();
         for(long id:ids)
         {
             Optional<Group> grp = groupService.getGroup(id);
@@ -43,13 +44,14 @@ public class UserServiceImpl implements UserService {
                     grp.get().setUsersIds(usrs);
                     groupService.saveGroup(grp.get());
                 }
-                else if(!users.contains(id))
+                else if(!users.contains(user.getId()))
                 {
-                    users.add(id);
+                    users.add(user.getId());
                     grp.get().setUsersIds(users);
                     groupService.saveGroup(grp.get());
                 }
             }
+             usr = userRepository.save(user);
         }
         return usr;
     }
