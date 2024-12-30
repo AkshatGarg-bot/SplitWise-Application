@@ -25,34 +25,7 @@ public class UserController {
     //Adding a user to db
     @PostMapping
     public User saveUser(@RequestBody  User user){
-        User usr = userService.saveUser(user);
-        List<Long> ids= usr.getGroupsIds();
-        for(long id:ids)
-        {
-            Optional<Group> grp = groupService.getGroup(id);
-            if(grp.isEmpty())
-            {
-                return null;
-            }
-            else
-            {
-                List<Long> users= grp.get().getUsersIds();
-                if(users == null)
-                {
-                    List<Long> usrs = new ArrayList<>();
-                    usrs.add(id);
-                    grp.get().setUsersIds(usrs);
-                    groupService.saveGroup(grp.get());
-                }
-                else if(!users.contains(id))
-                {
-                    users.add(id);
-                    grp.get().setUsersIds(users);
-                    groupService.saveGroup(grp.get());
-                }
-            }
-        }
-        return usr;
+        return  userService.saveUser(user);
 
     }
 
