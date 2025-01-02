@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
                 if(users == null)
                 {
                     List<Long> usrs = new ArrayList<>();
-                    usrs.add(id);
+                    usrs.add(user.getId());
                     grp.get().setUsersIds(usrs);
                     groupService.saveGroup(grp.get());
                 }
