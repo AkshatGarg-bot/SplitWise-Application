@@ -4,22 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "Transactions")
 @Getter
 @Setter
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long id = Math.abs(UUID.randomUUID().toString().hashCode() % 100L);
     private Long fromUserId;
-
     private Long toUserId;
-
     private Double amount;
-
-
     private Long groupId;
-
 }

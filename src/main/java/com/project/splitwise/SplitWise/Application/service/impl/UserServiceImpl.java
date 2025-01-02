@@ -1,6 +1,7 @@
 package com.project.splitwise.SplitWise.Application.service.impl;
 
 import com.project.splitwise.SplitWise.Application.dao.entity.Group;
+import com.project.splitwise.SplitWise.Application.dao.entity.Transaction;
 import com.project.splitwise.SplitWise.Application.dao.entity.User;
 import com.project.splitwise.SplitWise.Application.dao.repository.UserRepository;
 import com.project.splitwise.SplitWise.Application.service.GroupService;
@@ -82,5 +83,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getUser(long id) {
         return userRepository.findById(id);
+    }
+    public boolean checkUser(Transaction transaction)
+    {
+        if(getUser(transaction.getToUserId()).isEmpty() || getUser(transaction.getFromUserId()).isEmpty())
+            return false;
+        return true;
     }
 }
