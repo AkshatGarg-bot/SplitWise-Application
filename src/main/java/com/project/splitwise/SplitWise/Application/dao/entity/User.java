@@ -18,6 +18,7 @@ import java.util.UUID;
 public class User {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id = Math.abs(UUID.randomUUID().toString().hashCode() % 1_000_000_000L);
     private String name;
 
